@@ -2,41 +2,32 @@
 
 using namespace std;
 
-const int SIZE = 80, N = 2;
+const int  ROW = 3, COL = 10;
 
-void inputStr(char **Str) {
-	for (int i = 0; i <= N; i++) {
-		cout << "Enter " << i + 1 <<  " string: ";
-		cin.getline(Str[i], SIZE);
-	}
-	cout << endl;
-}
-
-void outStr(char **Str) {
-	for (int i = 0; i <= N; i++) {
-		cout << i + 1 << ')' << '\t';
-		puts(Str[i] + i);
+void inputStr(char str[][COL], const int ROW, const int COL) {
+	cout << "Input" << endl;
+	for (int i = 0; i < ROW; i++) {
+		cout << i+1 << " string: ";
+		cin.getline(str[i], COL);
 	}
 }
 
-void sortStr(char** Str, int *numOfNumbers) {
-	int i = 0;
-	for (int j = 0; j <= N; j++) {
-		while (Str[i][j] != '\0') {
-			if (Str[i][j] >= 48 && Str[i][j] <= 57) {
-				numOfNumbers[j]++;
-			}
-			j++;
+void outStr(char str[][COL], const int ROW, const int COL) {
+	cout << endl << "Output: " << endl;
+	for (int i = 0; i < ROW; i++) {
+		for (int j = 0; j < COL; j++) {
+			cout << str[i][j];
 		}
+		cout << endl;
 	}
 }
 
-int main() {
-	char Str[SIZE][N];
-	int numOfNumbers[N+1];
-
-	inputStr((char**)Str);
-	outStr((char**)Str);
-
+int main() 
+{
+	char str[ROW][COL];
+	char* str_p[ROW];
+	inputStr(str, ROW, COL);
+	outStr(str, ROW, COL);
+	
 	return 0;
 }
