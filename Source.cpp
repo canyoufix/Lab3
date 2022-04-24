@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -11,16 +12,9 @@ void inputStr(char** pstr, char str[][COL]) {
 
 	cout << "\tINPUT" << endl;						//input
 	for (int i = 0; i < ROW; i++) {
-		cout << i + 1 << " string: ";
+		cout << i + 1 << " | ";
 		cin.getline(pstr[i], COL);
 	}
-	cout << endl;
-}
-
-void outStr(char **pstr) {
-	cout << "\tRESULT:" << endl;
-	for (int i = 0; i < ROW; i++)
-		cout << " | " << pstr[i] << "\t|" << endl;
 	cout << endl;
 }
 
@@ -32,6 +26,14 @@ int countNum(char** pstr, int indexStr) {
 		j++;
 	}
 	return nNum;
+}
+
+void outStr(char** pstr) {
+	cout << "\tRESULT:" << endl;
+	for (int i = 0; i < ROW; i++) {
+		cout << i + 1 << " | " << pstr[i] << endl;
+		cout << "  |" << setw(40) << "Num of digits: " << countNum(pstr, i) << endl;
+	}
 }
 
 void sortStr(char** pstr) {
