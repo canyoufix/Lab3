@@ -2,32 +2,67 @@
 
 using namespace std;
 
-const int  ROW = 3, COL = 10;
+const int  ROW = 7, COL = 50;
 
-void inputStr(char str[][COL], const int ROW, const int COL) {
-	cout << "Input" << endl;
+//FUNCTION
+void inputStr(char** pstr, char str[][COL]) {
+	for (int i = 0; i < ROW; i++)					//array pstr
+		pstr[i] = str[i];
+
+	cout << "\tINPUT" << endl;						//input
 	for (int i = 0; i < ROW; i++) {
-		cout << i+1 << " string: ";
-		cin.getline(str[i], COL);
+		cout << i + 1 << " string: ";
+		cin.getline(pstr[i], COL);
 	}
+	cout << endl;
 }
 
-void outStr(char str[][COL], const int ROW, const int COL) {
-	cout << endl << "Output: " << endl;
-	for (int i = 0; i < ROW; i++) {
-		for (int j = 0; j < COL; j++) {
-			cout << str[i][j];
+void outStr(char **pstr) {
+	cout << "\tRESULT:" << endl;
+	for (int i = 0; i < ROW; i++)
+		cout << " | " << pstr[i] << "\t|" << endl;
+	cout << endl;
+}
+
+int countNum(char** pstr, int indexStr) {
+	int nNum = 0, j = 0;
+	while (pstr[indexStr][j] != '\0') {
+		if (pstr[indexStr][j] >= 48 && pstr[indexStr][j] <= 57)
+			nNum++;
+		j++;
+	}
+	return nNum;
+}
+
+void sortStr(char** pstr) {
+	char* buffer;												//backup
+	for (int i = 0; i < ROW - 1; i++)
+	{
+		bool isSwap = false;									//optimization
+		for (int j = 0; j < ROW - 1 - i; j++)
+		{
+			if (countNum(pstr, j) > countNum(pstr, j + 1)) {
+				buffer = pstr[j];
+				pstr[j] = pstr[j + 1];
+				pstr[j + 1] = buffer;
+				isSwap = true;
+			}
 		}
-		cout << endl;
+		if (isSwap == false)
+			break;
 	}
 }
+//FUNCTION
+
 
 int main() 
 {
 	char str[ROW][COL];
-	char* str_p[ROW];
-	inputStr(str, ROW, COL);
-	outStr(str, ROW, COL);
+	char* pstr[ROW];
 	
+	inputStr(pstr, str);
+	sortStr(pstr);
+	outStr(pstr);
+
 	return 0;
 }
